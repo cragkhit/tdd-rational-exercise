@@ -84,19 +84,24 @@ class Rational {
      * @return true if the given rational number equals to the current, false otherwise
      */
     public boolean equals(Object x) {
-        // to be completed
-        return true; // TODO: This needs to be modified.
+        if (!(x instanceof Rational)) return false;
+        Rational other = (Rational) x;
+        // a/b == c/d  <=>  a*d == c*b, so 1/2 equals 2/4 even if neither is simplified
+        return numerator * other.denominator == other.numerator * denominator;
     }
 
     /***
-     * Compare the current rational number to the current rational number
+     * Compare the current rational number to the given rational number
      * @param x the rational number to be compared to the current rational number
      * @return -1 if the current rational number is less than the given number, 0 if they're equal, 1 if the current
      * rational number is larger than the given number
      */
     public long compareTo(Object x) {
-        // to be completed
-        return -1; // TODO: this needs to be modified.
+        Rational other = (Rational) x;
+        // compare a/b with c/d by the sign of a*d - c*b; multiplying both sides by b*d
+        // flips the result when b*d is negative, so correct for that sign as well
+        long difference = numerator * other.denominator - other.numerator * denominator;
+        return Long.signum(difference) * Long.signum(denominator * other.denominator);
     }
 
     /***
@@ -104,8 +109,7 @@ class Rational {
      * @return the string representation of the rational number. For example, "1/2", "3/4".
      */
     public String toString() { 
-        // to be completed
-        return ""; // TODO: This needs to be modified.
+        return numerator + "/" + denominator;
     }
 
     public static void main(String[] args) {

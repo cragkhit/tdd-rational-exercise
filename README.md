@@ -29,10 +29,7 @@ This exercise is to be done **individually**.
    ```
 
 3. Open the project in IntelliJ. When asked which type of project to open,
-   select **Maven**. The project targets Java 8, so set the *Project SDK* and
-   *Project language level* to 1.8 (**File > Project Structure > Project**).
-
-   ![Java version configuration](docs/images/java-8.png)
+   select **Maven**. Any Java version installed on your machine will work.
 
 4. Look at the `Rational` class in
    [`src/main/java/Rational.java`](src/main/java/Rational.java). Its partial
@@ -90,18 +87,22 @@ This exercise is to be done **individually**.
        }
 
        public boolean equals(Object x) {
-           // to be completed
-           return true; // TODO: This needs to be modified.
+           if (!(x instanceof Rational)) return false;
+           Rational other = (Rational) x;
+           // a/b == c/d  <=>  a*d == c*b, so 1/2 equals 2/4 even if neither is simplified
+           return numerator * other.denominator == other.numerator * denominator;
        }
 
        public long compareTo(Object x) {
-           // to be completed
-           return -1; // TODO: this needs to be modified.
+           Rational other = (Rational) x;
+           // compare a/b with c/d by the sign of a*d - c*b; multiplying both sides by b*d
+           // flips the result when b*d is negative, so correct for that sign as well
+           long difference = numerator * other.denominator - other.numerator * denominator;
+           return Long.signum(difference) * Long.signum(denominator * other.denominator);
        }
 
        public String toString() {
-           // to be completed
-           return ""; // TODO: This needs to be modified.
+           return numerator + "/" + denominator;
        }
 
        public static void main(String[] args) {
@@ -112,17 +113,22 @@ This exercise is to be done **individually**.
 
    What each method should do:
 
-   | Method | Expected behaviour |
-   | --- | --- |
-   | `Rational()` | Creates a rational number with default values. |
-   | `Rational(long numerator, long denominator)` | Creates `numerator/denominator`. Throws `Illegal` when the inputs are invalid. |
-   | `add(Rational x)` | Sets the current number to `this + x`. |
-   | `subtract(Rational x)` | Sets the current number to `this − x`. |
-   | `multiply(Rational x)` | Sets the current number to `this × x`. |
-   | `divide(Rational x)` | Sets the current number to `this ÷ x`. |
-   | `equals(Object x)` | Returns `true` if `x` is equal to the current number, `false` otherwise. |
-   | `compareTo(Object x)` | Returns `-1` if the current number is less than `x`, `0` if they are equal, `1` if it is greater. |
-   | `toString()` | Returns the number as a string, e.g. `"1/2"`, `"3/4"`. |
+   | Method | Status | Expected behaviour |
+   | --- | --- | --- |
+   | `Rational()` | To do | Creates a rational number with default values. |
+   | `Rational(long numerator, long denominator)` | To do | Creates `numerator/denominator`. Throws `Illegal` when the inputs are invalid. |
+   | `add(Rational x)` | Provided | Sets the current number to `this + x`. |
+   | `subtract(Rational x)` | To do | Sets the current number to `this − x`. |
+   | `multiply(Rational x)` | To do | Sets the current number to `this × x`. |
+   | `divide(Rational x)` | To do | Sets the current number to `this ÷ x`. |
+   | `equals(Object x)` | Provided | Returns `true` if `x` is equal to the current number, `false` otherwise. |
+   | `compareTo(Object x)` | Provided | Returns `-1` if the current number is less than `x`, `0` if they are equal, `1` if it is greater. |
+   | `toString()` | Provided | Returns the number as a string, e.g. `"1/2"`, `"3/4"`. |
+
+   `equals()`, `compareTo()` and `toString()` are already implemented for you,
+   so you can use them in your tests (for example,
+   `Assert.assertEquals(expected, actual)` uses `equals()`). They still count
+   as public methods, so test them too: you may find cases they get wrong.
 
 5. Write JUnit test cases in `RationalTest` under `src/test/java` to test the
    class above **before** you finish implementing `Rational`. Use the
