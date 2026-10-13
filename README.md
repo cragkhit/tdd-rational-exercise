@@ -19,8 +19,14 @@ This exercise is to be done **individually**.
 
 ## Exercise
 
-1. You need an IDE to work on this exercise. IntelliJ IDEA is recommended. You
-   can download it from <https://www.jetbrains.com/idea/download>.
+1. You need a Java IDE and a JDK (any version) for this exercise. Use either:
+
+   - **IntelliJ IDEA**: download it from <https://www.jetbrains.com/idea/download>.
+     The free Community Edition is enough.
+   - **Visual Studio Code**: download it from <https://code.visualstudio.com>,
+     then install the
+     [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
+     from the Extensions view. It adds Maven and JUnit support.
 
 2. Clone this repository to your local machine:
 
@@ -28,8 +34,15 @@ This exercise is to be done **individually**.
    git clone https://github.com/cragkhit/tdd-rational-exercise.git
    ```
 
-3. Open the project in IntelliJ. When asked which type of project to open,
-   select **Maven**. Any Java version installed on your machine will work.
+3. Open the project:
+
+   - **IntelliJ IDEA**: open the cloned folder. When asked which type of
+     project to open, select **Maven**.
+   - **VS Code**: choose **File > Open Folder...** and select the cloned
+     folder. The Java extension detects `pom.xml` and imports the project
+     automatically; wait until the status bar shows that Java is ready.
+
+   Any Java version installed on your machine will work.
 
 4. Look at the `Rational` class in
    [`src/main/java/Rational.java`](src/main/java/Rational.java). Its partial
@@ -172,8 +185,12 @@ This exercise is to be done **individually**.
    }
    ```
 
-7. Run this test by clicking the green arrow next to the method name, then
-   check the result.
+7. Run this test and check the result:
+
+   - **IntelliJ IDEA**: click the green arrow next to the method name.
+   - **VS Code**: click **Run Test** just above the method name, or open the
+     **Testing** view (the flask icon in the Activity Bar) and run it from
+     there.
 
    ![JUnit execution result in IntelliJ](docs/images/junit-1.png)
 
